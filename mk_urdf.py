@@ -7,6 +7,9 @@ class URDFPrinter():
 <robot name="Chaser">
 
   <!-- Colors -->
+  <material name="Black">
+    <color rgba="0 0 0 1.0"/>
+  </material>
   <material name="Grey">
     <color rgba="0.2 0.2 0.2 1.0"/>
   </material>
@@ -32,7 +35,7 @@ class URDFPrinter():
       <geometry>
         <box size="1 1 0.25" />
       </geometry>
-      <material name="Grey"/>
+      <material name="black"/>
     </visual>
   </link>
   """
@@ -59,7 +62,7 @@ class URDFPrinter():
       <geometry>
         <box size="0.1 0.1 0.1"/>
       </geometry>
-      <material name="Orange"/>
+      <material name="Grey"/>
     </visual>
   </link>
 
@@ -82,7 +85,7 @@ class URDFPrinter():
       <geometry>
         <cylinder radius="0.3" length="0.01"/>
       </geometry>
-      <material name="Blue"/>
+      <material name="%(plate_color)s"/>
     </visual>
   </link>
   """
@@ -101,8 +104,13 @@ class URDFPrinter():
         parent = "Plate%d" % (i-1)
       else:
         parent = self.base_name
+      
+      if (i + 1) % 4 == 0:
+        plate_color = "Orange"
+      else:
+        plate_color = "Grey"
 
-      print(self.section_template % {'parent': parent, 'index': i})
+      print(self.section_template % {'parent': parent, 'index': i, 'plate_color': plate_color})
     
     print(self.footer)
 
