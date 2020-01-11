@@ -6,6 +6,8 @@ import pybullet_data
 p.connect(p.GUI)    
 # p.connect(p.DIRECT) # don't render
 
+#p.configureDebugVisualizer(p.COV_ENABLE_RGB_BUFFER_PREVIEW, True)
+
 # load urdf file path
 p.setAdditionalSearchPath(pybullet_data.getDataPath()) 
 
@@ -21,9 +23,13 @@ for i in range(p.getNumJoints(bodyId)):
 #p.setJointMotorControl2(bodyId, 0, p.POSITION_CONTROL, 1)
 #p.setJointMotorControl2(bodyId, 2, p.POSITION_CONTROL, 1)
 
+def camera():
+    p.getCameraImage(320, 200)
+
 # step through the simluation
 for i in range (10000):
     p.stepSimulation()
+    camera()
     time.sleep(1./240.)
 
 p.disconnect()
