@@ -98,7 +98,10 @@ class URDFPrinter():
 
   def print(self):
     print(self.header % {"base_name": self.base_name})
+    self.print_manipulator()
+    print(self.footer)
 
+  def print_manipulator(self):
     for i in range(16):
       if i > 0:
         parent = "Plate%d" % (i-1)
@@ -116,7 +119,5 @@ class URDFPrinter():
         'plate_color': plate_color, 'plate_radius': 0.2,
         'joint_z': 0.05})
     
-    print(self.footer)
-
 p = URDFPrinter()
 p.print()
