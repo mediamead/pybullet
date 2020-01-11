@@ -4,7 +4,7 @@ class URDFPrinter():
   header = """
 <?xml version="1.0" ?>
 
-<robot name="Chaser">
+<robot name="%(name)s">
 
   <!-- Colors -->
   <material name="Black">
@@ -96,12 +96,28 @@ class URDFPrinter():
 
   base_name = "SprutBase"
 
-  def print(self):
-    print(self.header % {"base_name": self.base_name})
-    self.print_manipulator()
-    print(self.footer)
+  def print_manipulator(self, f):
+    self.print_header(f, "Manipulator")
+    self.print_manipulator_body(f)
+    self.print_footer(f)
 
-  def print_manipulator(self):
+  def print_cage(self, f):
+    self.print_header(f, "Cage")
+    self.print_cage_body(f)
+    self.print_footer(f)
+
+  def print_target(self, f):
+    self.print_header(f, "Target")
+    self.print_target_body(f)
+    self.print_footer(f)
+
+  def print_header(self, f, name):
+    print(self.header % {"base_name": self.base_name, 'name': name}, file=f)
+
+  def print_footer(self, f):
+    print(self.footer,file = f)
+
+  def print_manipulator_body(self, f):
     for i in range(16):
       if i > 0:
         parent = "Plate%d" % (i-1)
@@ -117,7 +133,16 @@ class URDFPrinter():
         'parent': parent, 'index': i,
         'block_size': "0.05 0.05 0.025",
         'plate_color': plate_color, 'plate_radius': 0.2,
-        'joint_z': 0.05})
-    
+        'joint_z': 0.05}, file=f)
+
+  def print_cage_body(self, f):
+    print("<!-- fixme cage -->", file=f)
+
+  def print_target_body(self, f):
+    print("<!-- fixme target -->", file=f)
+
+
 p = URDFPrinter()
-p.print()
+p.print_manipulator(open("manipulator.urdf", "w"))
+p.print_target(open("target.urdf", "w"))
+p.print_cage(open("cage.urdf", "w"))

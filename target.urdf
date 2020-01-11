@@ -1,0 +1,42 @@
+
+<?xml version="1.0" ?>
+
+<robot name="Target">
+
+  <!-- Colors -->
+  <material name="Black">
+    <color rgba="0 0 0 1.0"/>
+  </material>
+  <material name="Grey">
+    <color rgba="0.2 0.2 0.2 1.0"/>
+  </material>
+  <material name="Orange">
+    <color rgba="1.0 0.423529411765 0.0392156862745 1.0"/>
+  </material>
+  <material name="Blue">
+  <color rgba="0.0 0.0 1 1.0"/>      
+  </material>
+  <material name="Red">
+    <color rgba="1 0 0 1.0"/>      
+  </material>
+
+  <!-- Base Link -->
+  <link name="SprutBase">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="100"/>
+      <inertia ixx="9.3" ixy="0" ixz="0" iyy="9.3" iyz="0" izz="9.3"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="1 1 0" />
+      </geometry>
+      <material name="black"/>
+    </visual>
+  </link>
+  
+<!-- fixme target -->
+
+  </robot>
+  

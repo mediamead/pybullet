@@ -1,7 +1,7 @@
 
 <?xml version="1.0" ?>
 
-<robot name="Chaser">
+<robot name="Manipulator">
 
   <!-- Colors -->
   <material name="Black">
