@@ -48,14 +48,14 @@ class URDFPrinter():
     <child link="Block%(index)d"/>
     <origin rpy="0 0 0" xyz="0 0 %(joint_z)f"/>
     <axis xyz="1 0 0"/>
-    <limit effort="1000.0" lower="0.0" upper="0.548" velocity="0.5"/>    
+    <limit effort="1000.0" lower="-1.0" upper="1.0" velocity="1000.0"/>
   </joint>
 
   <link name="Block%(index)d">
     <inertial>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <mass value="5"/>
-      <inertia ixx="0.05" ixy="0" ixz="0" iyy="0.05" iyz="0" izz="0.05"/>
+      <mass value="1"/>
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
     </inertial>
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -71,19 +71,19 @@ class URDFPrinter():
     <child link="Plate%(index)d"/>
     <origin rpy="0 0 0" xyz="0 0 %(joint_z)f"/>
     <axis xyz="0 1 0"/>
-    <limit effort="1000.0" lower="0.0" upper="0.548" velocity="0.5"/>    
+    <limit effort="1000.0" lower="-1.0" upper="1.0" velocity="1000.0"/>
   </joint>
 
   <link name="Plate%(index)d">
     <inertial>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <mass value="5"/>
-      <inertia ixx="0.05" ixy="0" ixz="0" iyy="0.05" iyz="0" izz="0.05"/>
+      <mass value="1"/>
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
     </inertial>
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <cylinder radius="%(plate_radius)f" length="0.01"/>
+        <cylinder radius="%(plate_radius)f" length="0.025"/>
       </geometry>
       <material name="%(plate_color)s"/>
     </visual>
@@ -118,7 +118,9 @@ class URDFPrinter():
   def print_manipulator_body(self, f):
     print(self.manipulator_base_template % {"base_name": self.base_name}, file=f)
 
-    for i in range(16):
+    NJ = 8
+    JD = 0.15
+    for i in range(NJ):
       if i > 0:
         parent = "Plate%d" % (i-1)
       else:
@@ -133,7 +135,7 @@ class URDFPrinter():
         'parent': parent, 'index': i,
         'block_size': "0.05 0.05 0.025",
         'plate_color': plate_color, 'plate_radius': 0.2,
-        'joint_z': 0.05}, file=f)
+        'joint_z': JD}, file=f)
 
   def print_cage_body(self, f):
     print("<!-- fixme cage -->", file=f)
@@ -141,6 +143,11 @@ class URDFPrinter():
   target_template = """
 <link name="base_link">
   <origin rpy="0 0 0" xyz="%(xyz)s"/>
+  <inertial>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <mass value="1"/>
+    <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+  </inertial>
   <visual>
     <geometry>
       <sphere radius="%(r)f"/>
@@ -151,7 +158,7 @@ class URDFPrinter():
 """
 
   def print_target_body(self, f):
-    print(self.target_template % {"xyz": "1 1 1", "r": 0.1}, file=f)
+    print(self.target_template % {"xyz": "1 1 1", "r": 0.05}, file=f)
 
 p = URDFPrinter()
 p.print_manipulator(open("manipulator.urdf", "w"))

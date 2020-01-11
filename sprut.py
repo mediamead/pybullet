@@ -30,7 +30,11 @@ loadBody("target.urdf", [0, 0, 3])
 bodyId = loadBody("manipulator.urdf")
 
 for i in range(p.getNumJoints(bodyId)):
-    p.setJointMotorControl2(bodyId, i, p.POSITION_CONTROL, (i+1)%2/10)
+    if (i+1) % 2 == 1:
+        pos = 0.1
+    else:
+        pos = 0
+    p.setJointMotorControl2(bodyId, i, p.POSITION_CONTROL, pos, force=5000)
     #link_name = p.getJointInfo(bodyId, i)[12].decode('UTF-8')
     #print("joint %d, link %s" % (i, link_name))
 
@@ -60,6 +64,6 @@ def camera():
 for i in range (10000):
     p.stepSimulation()
     camera()
-    time.sleep(1./240.)
+    #time.sleep(1./240.)
 
 p.disconnect()
