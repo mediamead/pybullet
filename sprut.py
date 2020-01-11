@@ -13,7 +13,7 @@ p.setAdditionalSearchPath(pybullet_data.getDataPath())
 #p.setGravity(0,0,-10)
 cubeStartPos = [0,0,1]
 cubeStartOrientation = p.getQuaternionFromEuler([0,0,0])
-bodyId = p.loadURDF("./sprut.urdf", cubeStartPos, cubeStartOrientation)
+bodyId = p.loadURDF("./sprut.urdf", cubeStartPos, cubeStartOrientation, useFixedBase=1)
 
 for i in range(p.getNumJoints(bodyId)):
     p.setJointMotorControl2(bodyId, i, p.POSITION_CONTROL, (i+1)%2/10)
