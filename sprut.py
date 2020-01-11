@@ -15,9 +15,15 @@ p.setAdditionalSearchPath(pybullet_data.getDataPath())
 
 # load urdf and set gravity
 #p.setGravity(0,0,-10)
-cubeStartPos = [0,0,1]
-cubeStartOrientation = p.getQuaternionFromEuler([0,0,0])
-bodyId = p.loadURDF("./manipulator.urdf", cubeStartPos, cubeStartOrientation, useFixedBase=1)
+
+def loadBody(f, startPos=[0, 0, 0]):
+    startOrientation = p.getQuaternionFromEuler([0,0,0])
+    bodyId = p.loadURDF("./" + f, startPos, startOrientation, useFixedBase=1)
+    return bodyId
+
+loadBody("target.urdf", [0, 0, 3])
+
+bodyId = loadBody("manipulator.urdf")
 
 for i in range(p.getNumJoints(bodyId)):
     p.setJointMotorControl2(bodyId, i, p.POSITION_CONTROL, (i+1)%2/10)
