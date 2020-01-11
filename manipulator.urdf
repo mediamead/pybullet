@@ -32,10 +32,9 @@
       <geometry>
         <box size="1 1 0" />
       </geometry>
-      <material name="black"/>
+      <material name="Black"/>
     </visual>
   </link>
-  
 
   <!-- Section 0 -->
 
@@ -84,7 +83,6 @@
       <material name="Grey"/>
     </visual>
   </link>
-  
 
   <!-- Section 1 -->
 
@@ -133,7 +131,6 @@
       <material name="Grey"/>
     </visual>
   </link>
-  
 
   <!-- Section 2 -->
 
@@ -182,7 +179,6 @@
       <material name="Grey"/>
     </visual>
   </link>
-  
 
   <!-- Section 3 -->
 
@@ -231,7 +227,6 @@
       <material name="Orange"/>
     </visual>
   </link>
-  
 
   <!-- Section 4 -->
 
@@ -280,7 +275,6 @@
       <material name="Grey"/>
     </visual>
   </link>
-  
 
   <!-- Section 5 -->
 
@@ -329,7 +323,6 @@
       <material name="Grey"/>
     </visual>
   </link>
-  
 
   <!-- Section 6 -->
 
@@ -378,7 +371,6 @@
       <material name="Grey"/>
     </visual>
   </link>
-  
 
   <!-- Section 7 -->
 
@@ -427,7 +419,6 @@
       <material name="Orange"/>
     </visual>
   </link>
-  
 
   <!-- Section 8 -->
 
@@ -476,7 +467,6 @@
       <material name="Grey"/>
     </visual>
   </link>
-  
 
   <!-- Section 9 -->
 
@@ -525,7 +515,6 @@
       <material name="Grey"/>
     </visual>
   </link>
-  
 
   <!-- Section 10 -->
 
@@ -574,7 +563,6 @@
       <material name="Grey"/>
     </visual>
   </link>
-  
 
   <!-- Section 11 -->
 
@@ -623,7 +611,6 @@
       <material name="Orange"/>
     </visual>
   </link>
-  
 
   <!-- Section 12 -->
 
@@ -672,7 +659,6 @@
       <material name="Grey"/>
     </visual>
   </link>
-  
 
   <!-- Section 13 -->
 
@@ -721,7 +707,6 @@
       <material name="Grey"/>
     </visual>
   </link>
-  
 
   <!-- Section 14 -->
 
@@ -770,7 +755,6 @@
       <material name="Grey"/>
     </visual>
   </link>
-  
 
   <!-- Section 15 -->
 
@@ -819,7 +803,5 @@
       <material name="Orange"/>
     </visual>
   </link>
-  
 
-  </robot>
-  
+</robot>

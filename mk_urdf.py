@@ -21,8 +21,9 @@ class URDFPrinter():
   </material>
   <material name="Red">
     <color rgba="1 0 0 1.0"/>      
-  </material>
+  </material>"""
 
+  manipulator_base_template = """
   <!-- Base Link -->
   <link name="%(base_name)s">
     <inertial>
@@ -35,10 +36,9 @@ class URDFPrinter():
       <geometry>
         <box size="1 1 0" />
       </geometry>
-      <material name="black"/>
+      <material name="Black"/>
     </visual>
-  </link>
-  """
+  </link>"""
 
   section_template = """
   <!-- Section %(index)d -->
@@ -87,12 +87,10 @@ class URDFPrinter():
       </geometry>
       <material name="%(plate_color)s"/>
     </visual>
-  </link>
-  """
+  </link>"""
 
   footer = """
-  </robot>
-  """
+</robot>"""
 
   base_name = "SprutBase"
 
@@ -112,12 +110,14 @@ class URDFPrinter():
     self.print_footer(f)
 
   def print_header(self, f, name):
-    print(self.header % {"base_name": self.base_name, 'name': name}, file=f)
+    print(self.header % {"name": name}, file=f)
 
   def print_footer(self, f):
     print(self.footer,file = f)
 
   def print_manipulator_body(self, f):
+    print(self.manipulator_base_template % {"base_name": self.base_name}, file=f)
+
     for i in range(16):
       if i > 0:
         parent = "Plate%d" % (i-1)
@@ -138,9 +138,20 @@ class URDFPrinter():
   def print_cage_body(self, f):
     print("<!-- fixme cage -->", file=f)
 
-  def print_target_body(self, f):
-    print("<!-- fixme target -->", file=f)
+  target_template = """
+<link name="base_link">
+  <origin rpy="0 0 0" xyz="%(xyz)s"/>
+  <visual>
+    <geometry>
+      <sphere radius="%(r)f"/>
+    </geometry>
+    <material name="Red"/>
+  </visual>
+</link>
+"""
 
+  def print_target_body(self, f):
+    print(self.target_template % {"xyz": "1 1 1", "r": 0.1}, file=f)
 
 p = URDFPrinter()
 p.print_manipulator(open("manipulator.urdf", "w"))
